@@ -1,0 +1,14 @@
+#este não está na lista das atividades que ele pediu!!
+
+binario = input("Binário: ")
+bits = (len(binario))
+posicao = bits - 1
+decimal = 0
+
+for i in binario:
+    binario = int(i)   #conversão de string para inteiro
+    parcela = binario * (2**posicao)   #parcela da soma
+    posicao -= 1
+    decimal += parcela   #decimal = soma das parcelas
+
+print(f"Decimal = {decimal}")
