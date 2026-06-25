@@ -1,1 +1,59 @@
-a
+niveis = int(input("Níveis de quantização: "))
+niveis_aux = niveis
+
+#Quantidade de bits quando o nível de quantização for 1
+if niveis == 1:
+    print('''Quantidade de bits: 0
+        Combinações: não há combinações possíveis''')
+
+#Quantidade de bits para níveis maiores que 1
+else:
+    bits = 0
+    quociente = niveis_aux
+    while quociente != 1:
+        quociente = niveis_aux//2
+        bits += 1
+        niveis_aux = quociente
+
+    print(f"Número de bits: {bits}")
+
+#Combinações
+lista_combinacoes = []
+string = ""
+
+for decimal in range(niveis):
+    decimal2 = decimal
+    lista = []
+
+    for c in range(bits):
+        quociente = decimal//2
+        resto = decimal % 2
+        decimal = quociente
+
+        lista.insert(0, resto)
+        string = ""
+        for i in lista:
+            string += str(i)
+
+    print(f"Binário de {decimal2} = {string}")    
+    lista_combinacoes.append(string)
+
+print(f"Combinações: {lista_combinacoes}")
+
+
+#Número de bits e combinações possíveis de acordo com os níveis de quantização
+
+1º passo: O usuário informa a quantidade de níveis de quantização e uma variável auxiliar [niveis_aux] recebe também esse valor, para que ela possa ter o valor modificado e a variável original [niveis] não perder o seu.
+
+2º passo: A quantidade de níveis determina a quantidade de bits, pois 2^bits = níveis de quantização. 
+
+- Condição 1: Se a quantidade de níveis for igual a 1, a quantidade de bits é 0, pois 2^0 = 1, e não há nenhuma combinação possível, uma vez que bits = 0
+- Condição 2: Se a quantidade de níveis é maior que 1, cria-se uma variável [bits] que recebe 1 unidade a cada volta no loop, contando o número de bits, e a variável [quociente] recebe o valor de [niveis_aux] e entra em um loop onde é dividida sucessivamente por 2 até que o [quociente] seja 1, pois significa que não há mais divisões inteiras para serem feitas. Sempre que o valor de [niveis_aux] é dividido por 2, soma 1 unidade à variável [bits] e [niveis_aux] muda seu valor para o novo valor do [quociente], para que o valor seja sempre reduzido à metade e não entre em loop infinito. 
+
+Assim, encontramos o número de bits.
+
+3º passo: Encontrando o número de bits: [bits] = quantidade de dígitos do número binário. 
+Inicia criando uma [lista_combinacoes] vazia para armazenar os restos das divisões, sempre colocando o próximo elemento na frente, já que devemos pegar os restos ao contrário, e uma variável [string] vazia que vai receber os elementos da lista em ordem no final.
+Cria um loop para cada [decimal] possível de acordo com a quantidade de [niveis], com uma variável auxiliar [decimal2] para armazenar o valor original e uma lista vazia que cria cada número binário e esvazia a cada loop para receber o próximo. Cada [decimal] entra em um loop de sucessivas divisões por 2, para pegar os restos e montar o número binário. A [lista] armazena cada [resto], colocando os valores na frente. Depois, a string vazia recebe cada um desses elementos. Em cada loop é possível ver o binério de cada decimal, enquanto a [lista_combinacoes] armazena os cada binario formado.
+
+Por fim, temos a quantidade de bits e uma lista com todas as combinações possíveis dentro daquela determinada quantidade de níveis.
