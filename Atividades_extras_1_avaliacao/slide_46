@@ -1,0 +1,21 @@
+binario = input("Binário: ")
+bits = (len(binario))
+posicao = bits - 1
+decimal = 0
+
+for i in binario:
+    binario = int(i)   #conversão de string para inteiro
+    parcela = binario * (2**posicao)   #parcela da soma
+    posicao -= 1
+    decimal += parcela   #decimal = soma das parcelas
+
+print(f"Decimal = {decimal}")
+
+
+#Conversão de binário para decimal
+
+1º passo: O usuário informa um número [binario] qualquer, a variável [bits] armazena a quantidade de dígitos do binário, a [posicao] do número no binário é a quantidade de [bits] - 1, pois elas vão de 0 a 1 unidade anterior à quantidade de [bits] e o [decimal] é a soma das parcelas encontradas.
+
+2º passo: O número [binario] entra em um loop que roda a quantidade de dígitos que ele possui, em que cada dígito multiplicado  por 2 elevado à sua [posicao] gera uma [parcela]. A cada volta, a [posicao] diminui em 1 unidade e o [decimal] armazena a soma de cada nova [parcela].
+
+No fim do loop, o número decimal está formado e é exibido.
